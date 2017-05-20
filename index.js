@@ -4,29 +4,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 
 
-var mqtt = require('mqtt')
-var fs = require('fs');
-
-var client = mqtt.connect('mqtt://broker.hivemq.com', {username:'gs99100', password:'horrendous'});
-
-
-client.subscribe('apiai/ireading')
-client.subscribe('apiai/sreading')
-
-client.on('message', function (topic, message) {
-  // message is Buffer 
-  if (topic == 'apiai/sreading') {
-  var sensoread = message.toString()
-  console.log(message.toString())
-  fs.writeFile("test", sensoread, function(err) {
-    if(err) {
-        return console.log(err);
-    }
-//console.log("The file was saved!");
-});
-}
-})
-
 const restService = express();
 restService.use(bodyParser.json());
 
@@ -36,11 +13,13 @@ restService.post('/hook', function (req, res) {
 
     try {
         var speech = 'empty speech';
-
+	var query = 'empty query';
         if (req.body) {
             var requestBody = req.body;
 
             if (requestBody.result) {
+		query = requestBody.result.resolvedQuery;
+	        query += ' ';
                 speech = '';
 
                 if (requestBody.result.fulfillment) {
@@ -53,20 +32,33 @@ restService.post('/hook', function (req, res) {
                 }
             }
         }
+	    var google = require('C:/Users/HE_MAN/node_modules/googleapis/lib/googleapis.js');
+	    var customsearch = google.customsearch('v1');
+	    const CX = '000451306854787167072:pahciazb7zi';
+	    const API_KEY = 'AIzaSyAhdnz5r_s_ycLVShXNdrjtlnXaCPIVMS8';
+	    const SEARCH = query;
 
-        console.log('result: ', speech);
-		client.publish('apiai/ireading', speech)
-		//console.log("rest in peace")
-		fs.readFile('test','utf8', function(err, contents) {
-					console.log("The content of the file"+contents);
-//});
-		var sread = contents
-        return res.json({
-            speech: speech,
-            displayText:sread,
+	    customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
+	    if (err) {
+  		  return console.log('An error occured', err);
+		     }
+ 	    // Got the response from custom search
+ 	    console.log('Result: ' + resp.searchInformation.formattedTotalResults);
+ 	    if (resp.items && resp.items.length > 0) {
+	       
+	    console.log('You can visit on: ' + resp.items[0].title + ' ' + resp.items[0].link );
+		    	    
+	    }
+		    
+	    var sreed =	resp    
+	    return res.json({
+            speech: resp,
+            displayText:resp,
             source: 'apiai-webhook-IOTecosystem'
-        });
-        });
+	    });
+	    });
+	    
+        
     } catch (err) {
         console.error("Can't process request", err);
 
