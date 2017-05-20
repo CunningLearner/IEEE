@@ -50,10 +50,10 @@ restService.post('/hook', function (req, res) {
 		    	    
 	    }
 		    
-	    var sreed =	resp    
+	    var sreed =	resp.items[0].title + ' ' + resp.items[0].link     
 	    return res.json({
-            speech: resp,
-            displayText:resp,
+            speech: sreed,
+            displayText:sreed,
             source: 'apiai-webhook-IOTecosystem'
 	    });
 	    });
