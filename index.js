@@ -32,7 +32,7 @@ restService.post('/hook', function (req, res) {
                 }
             }
         }
-	    var google = require('C:/Users/HE_MAN/node_modules/googleapis/lib/googleapis.js');
+	    var google = require('googleapis');
 	    var customsearch = google.customsearch('v1');
 	    const CX = '000451306854787167072:pahciazb7zi';
 	    const API_KEY = 'AIzaSyAhdnz5r_s_ycLVShXNdrjtlnXaCPIVMS8';
