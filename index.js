@@ -47,7 +47,6 @@ restService.post('/hook', function (req, res) {
   						   //if (resp.spelling.correctedQuery != SEARCH) {
   console.log(resp.spelling.correctedQuery);
   SEARCH = resp.spelling.correctedQuery;  
-  //console.log('halua'+ SEARCH) 
   customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
   if (err) {
     return console.log('An error occured', err);
@@ -57,13 +56,7 @@ restService.post('/hook', function (req, res) {
   console.log('Result: ' + resp.searchInformation.formattedTotalResults);
   if (resp.items && resp.items.length > 0) {
   for(i=0;i<1;i++)    				    // Can vary the no.of results to be shown
-console.log('First result name is ' + resp.items[i].title + ' ' 
-+ resp.items[i].link + ' ' + resp.items[i].displayLink
-+ ' ' + resp.items[i].htmlTitle + ' ' + resp.items[i].snippet
-+ ' ' + resp.items[i].htmlSnippet + ' ' + resp.items[i].cacheId
-+ ' ' + resp.items[i].mime + ' ' + resp.items[i].fileFormat
-+ ' ' + resp.items[i].htmlFormattedUrl + ' ' + resp.items[i].formattedUrl
-+ ' ' + resp.items[i].pagemap );
+console.log('First result name is ' + resp.items[i].title + ' ' + resp.items[i].link );
 
   }
 
@@ -86,10 +79,9 @@ console.log('First result name is ' + resp.items[i].title + ' '
 	    }
 		    
 	    var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link
-	    var link = ' \'' + resp.items[0].link + '\' '
 	    return res.json({
-            speech: sreed + open(link),
-            displayText:sreed + open(link),
+            speech: sreed ,
+            displayText:sreed ,
             source: 'apiai-webhook-IOTecosystem'
 	    });
 	    });
