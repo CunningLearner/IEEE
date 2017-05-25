@@ -56,7 +56,7 @@ restService.post('/hook', function (req, res) {
   // Got the response from custom search
   console.log('Result: ' + resp.searchInformation.formattedTotalResults);
   if (resp.items && resp.items.length > 0) {
-  for(i=0;i<1;i++)    
+  for(i=0;i<1;i++)    				    // Can vary the no.of results to be shown
 console.log('First result name is ' + resp.items[i].title + ' ' 
 + resp.items[i].link + ' ' + resp.items[i].displayLink
 + ' ' + resp.items[i].htmlTitle + ' ' + resp.items[i].snippet
@@ -67,6 +67,12 @@ console.log('First result name is ' + resp.items[i].title + ' '
 
   }
 
+            var Nested_sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link
+	    return res.json({
+            speech: Nested_sreed,
+            displayText: Nested_sreed,
+            source: 'apiai-webhook-IOTecosystem'
+	    });
   			     });
   		 				};  // finishes nested search  
 		    
