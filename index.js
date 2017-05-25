@@ -50,7 +50,7 @@ restService.post('/hook', function (req, res) {
 		    	    
 	    }
 		    
-	    var sreed =	resp.items[0].title + ' ' + resp.items[0].link     
+	    var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link     
 	    return res.json({
             speech: sreed,
             displayText:sreed,
