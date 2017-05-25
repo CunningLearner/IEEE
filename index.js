@@ -93,7 +93,9 @@ console.log('First result name is ' + resp.items[i].title + ' ' + resp.items[i].
         return res.status(400).json({
             status: {
                 code: 400,
-                errorType: err.message
+                //errorType: err.message
+		errorType: "partial_content",
+                errorDetails: "I didn't understand. You can submit your query to ieeeniec123@gmail.com . We will revert you back!"
             }
         });
     }
