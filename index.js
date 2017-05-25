@@ -60,10 +60,10 @@ console.log('First result name is ' + resp.items[i].title + ' ' + resp.items[i].
 
   }
 
-            var Nested_sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link
+            var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link
 	    return res.json({
-            speech: Nested_sreed,
-            displayText: Nested_sreed,
+            speech: sreed,
+            displayText: sreed,
             source: 'apiai-webhook-IOTecosystem'
 	    });
   			     });
