@@ -67,16 +67,7 @@ console.log('First result name is ' + resp.items[i].title + ' ' + resp.items[i].
             source: 'apiai-webhook-IOTecosystem'
 	    });
   			     });
-  		 				}catch (err) {
-						console.error("Can't process request", err);
-
-						return res.status(400).json({
-						    status: {
-					     	    code: 400,
-						    errorType: err.message
-						            }
-						    	     		   });
-					   		      };  // finishes nested search  
+  		 				}  // finishes nested search  
 		    
 		    
  	    // Got the response from custom search
