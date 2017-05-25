@@ -46,7 +46,7 @@ restService.post('/hook', function (req, res) {
  	    console.log('Result: ' + resp.searchInformation.formattedTotalResults);
  	    if (resp.items && resp.items.length > 0) {
 	       
-	    console.log('You can visit on: ' + resp.items[0].title + ' ' + resp.items[0].link );
+	    console.log('You can visit on: ' + resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link );
 		    	    
 	    }
 		    
