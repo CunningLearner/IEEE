@@ -42,6 +42,35 @@ restService.post('/hook', function (req, res) {
 	    if (err) {
   		  return console.log('An error occured', err);
 		     }
+		    
+	    if(resp.spelling){
+  						   //if (resp.spelling.correctedQuery != SEARCH) {
+  console.log(resp.spelling.correctedQuery);
+  SEARCH = resp.spelling.correctedQuery;  
+  //console.log('halua'+ SEARCH) 
+  customsearch.cse.list({ cx: CX, q: SEARCH, auth: API_KEY }, function (err, resp) {
+  if (err) {
+    return console.log('An error occured', err);
+  }
+
+  // Got the response from custom search
+  console.log('Result: ' + resp.searchInformation.formattedTotalResults);
+  if (resp.items && resp.items.length > 0) {
+  for(i=0;i<1;i++)    
+console.log('First result name is ' + resp.items[i].title + ' ' 
++ resp.items[i].link + ' ' + resp.items[i].displayLink
++ ' ' + resp.items[i].htmlTitle + ' ' + resp.items[i].snippet
++ ' ' + resp.items[i].htmlSnippet + ' ' + resp.items[i].cacheId
++ ' ' + resp.items[i].mime + ' ' + resp.items[i].fileFormat
++ ' ' + resp.items[i].htmlFormattedUrl + ' ' + resp.items[i].formattedUrl
++ ' ' + resp.items[i].pagemap );
+
+  }
+
+  			     });
+  		 				};  // finishes nested search  
+		    
+		    
  	    // Got the response from custom search
  	    console.log('Result: ' + resp.searchInformation.formattedTotalResults);
  	    if (resp.items && resp.items.length > 0) {
