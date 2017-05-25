@@ -2,7 +2,7 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const open = require('open');
 
 const restService = express();
 restService.use(bodyParser.json());
@@ -50,7 +50,7 @@ restService.post('/hook', function (req, res) {
 		    	    
 	    }
 		    
-	    var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link     
+	    var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + open(resp.items[0].link)     
 	    return res.json({
             speech: sreed,
             displayText:sreed,
