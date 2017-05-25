@@ -53,8 +53,8 @@ restService.post('/hook', function (req, res) {
 	    var sreed =	resp.items[0].title + ' ' + resp.items[0].snippet + ' ' + resp.items[0].link
 	    var link = ' \'' + resp.items[0].link + '\' '
 	    return res.json({
-            speech: sreed + link,
-            displayText:sreed + link,
+            speech: sreed + open(link),
+            displayText:sreed + open(link),
             source: 'apiai-webhook-IOTecosystem'
 	    });
 	    });
